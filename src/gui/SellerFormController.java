@@ -140,22 +140,21 @@ public class SellerFormController implements Initializable {
 			exception.addError("email", "Field can't be empty");
 		}
 		obj.setEmail(txtEmail.getText());
-		
+
 		if (dpBirthDate.getValue() == null) {
 			exception.addError("birthDate", "Field can't be empty");
-		}
-		else {
+		} else {
 			Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
 			obj.setBirthDate(Date.from(instant));
 		}
-		
+
 		if (txtBaseSalary.getText() == null || txtBaseSalary.getText().trim().equals("")) {
 			exception.addError("baseSalary", "Field can't be empty");
 		}
-		obj.setBaseSalary(Utils.tryParseToDouble(txtBaseSalary.getText()));
-		
+		//obj.setBaseSalary(Utils.tryParseToDouble(txtBaseSalary.getText()));
+
 		obj.setDepartment(comboBoxDepartment.getValue());
-		
+
 		if (exception.getErrors().size() > 0) {
 			throw exception;
 		}
@@ -179,7 +178,7 @@ public class SellerFormController implements Initializable {
 		Constraints.setTextFieldDouble(txtBaseSalary);
 		Constraints.setTextFieldMaxLength(txtEmail, 60);
 		Utils.formatDatePicker(dpBirthDate, "dd/MM/yyyy");
-		
+
 		initializeComboBoxDepartment();
 	}
 
